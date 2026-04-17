@@ -862,23 +862,35 @@ function carregarSupabase(){
     sbFetch('mentorias?order=created_at.asc'),
     sbFetch('pagamentos?order=created_at.asc'),
     sbFetch('posts_semana?order=created_at.asc')
-  ]).then(function(results){
-    var clientes=results[0]||[];
-    var tarefas=results[1]||[];
-    var mentorias=results[2]||[];
-    var pagamentos=results[3]||[];
-    var postsSemana=results[4]||[];
+ ]).then(function(results){
 
-    D.clientes=clientes.map(function(c){
-      return {
-        _id:c.id, nome:c.nome||'', nicho:c.nicho||'', valor:c.valor||'0',
-        vencimento:c.vencimento||'', drive:c.drive||'', alerta:c.alerta||'',
-        humor:c.humor||'', sentimento:c.sentimento||'', status:c.status||'Ativo',
-        abas:c.abas||['clientes'], postSemanal:c.post_semanal||false,
-        acessos:c.acessos||[], notas:c.notas||[],
-        resumo:c.resumo||'', resumoIA:c.resumo_ia||''
-      };
-    });
+  var clientes = results[0] || [];
+  var tarefas = results[1] || [];
+  var mentorias = results[2] || [];
+  var pagamentos = results[3] || [];
+  var postsSemana = results[4] || [];
+
+  D.clientes = clientes.map(function(c){
+    return {
+      _id:c.id, nome:c.nome||'', nicho:c.nicho||'', valor:c.valor||'0',
+      vencimento:c.vencimento||'', drive:c.drive||'', alerta:c.alerta||'',
+      humor:c.humor||'', sentimento:c.sentimento||'', status:c.status||'Ativo',
+      abas:c.abas||['clientes'], postSemanal:c.post_semanal||false,
+      acessos:c.acessos||[], notas:c.notas||[],
+      resumo:c.resumo||'', resumoIA:c.resumo_ia||''
+    };
+  });
+
+  D.tarefas = tarefas;
+  D.mentorias = mentorias;
+  D.pagamentos = pagamentos;
+  D.postsSemana = postsSemana;
+
+  // 🔥 AGORA SIM (NO FINAL)
+  renderAll();
+  renderAbaGrids();
+
+});
 
     D.tarefas=tarefas.map(function(t){
       var ci=D.clientes.findIndex(function(c){return c._id===t.cliente_id;});
