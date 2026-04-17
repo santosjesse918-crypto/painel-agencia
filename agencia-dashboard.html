@@ -747,37 +747,65 @@ function fazerLogout() {
 
 function iniciarPainel() {
   var u = currentUser;
+
   // Footer
   var av = document.getElementById('footer-avatar');
-  av.textContent = u.initials; av.style.background = u.bg; av.style.color = u.color;
+  av.textContent = u.initials; 
+  av.style.background = u.bg; 
+  av.style.color = u.color;
+
   document.getElementById('footer-name').textContent = u.name;
   document.getElementById('footer-role').textContent = u.role;
+
   // Nav
   var nav = document.getElementById('main-nav');
   nav.innerHTML = '';
+
   var lastSection = '';
+
   u.pages.forEach(function(p){
     var sec = NAV_SECTIONS[p];
+
     if(sec && sec !== lastSection){
       var d = document.createElement('div');
-      d.className = 'nav-section'; d.textContent = sec; nav.appendChild(d);
+      d.className = 'nav-section'; 
+      d.textContent = sec; 
+      nav.appendChild(d);
       lastSection = sec;
     }
+
     var btn = document.createElement('button');
     btn.className = 'nav-item';
     btn.innerHTML = '<span class="nav-icon">'+NAV_ICONS[p]+'</span> '+PAGE_NAMES[p];
-    btn.onclick = (function(pg,b){return function(){goPage(pg,b);};})(p,btn);
+
+    btn.onclick = (function(pg,b){
+      return function(){
+        goPage(pg,b);
+      };
+    })(p,btn);
+
     nav.appendChild(btn);
   });
-  // First page
+
   var firstBtn = nav.querySelector('.nav-item');
   if(firstBtn) firstBtn.classList.add('active');
+
   goPage(u.pages[0], firstBtn);
+
   setDate();
-  var _d=new Date();
-  var fm=document.getElementById('fin-mes'),fa=document.getElementById('fin-ano');
-  if(fm)fm.value=_d.getMonth();if(fa)fa.value=_d.getFullYear();
-  renderAll(); renderAbaGrids();
+
+  var _d = new Date();
+  var fm = document.getElementById('fin-mes'),
+      fa = document.getElementById('fin-ano');
+
+  if(fm) fm.value = _d.getMonth();
+  if(fa) fa.value = _d.getFullYear();
+
+  // 🔥 ESSA LINHA RESOLVE TUDO
+  carregar();
+
+  renderAll(); 
+  renderAbaGrids();
 }
 
 // ---- DATA ----
