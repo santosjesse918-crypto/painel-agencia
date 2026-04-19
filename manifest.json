@@ -1,0 +1,26 @@
+{
+  "name": "Assessória Marketing Jessé",
+  "short_name": "Painel Jessé",
+  "description": "Painel de gestão da Assessória Marketing Jessé",
+  "start_url": "./agencia-dashboard.html",
+  "display": "standalone",
+  "background_color": "#0a0a0f",
+  "theme_color": "#22c55e",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "https://placehold.co/192x192/22c55e/ffffff?text=AJ&font=montserrat",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://placehold.co/512x512/22c55e/ffffff?text=AJ&font=montserrat",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["business", "productivity"],
+  "lang": "pt-BR"
+}
